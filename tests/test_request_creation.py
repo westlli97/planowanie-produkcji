@@ -118,3 +118,13 @@ def test_index_order_requires_index_for_each_filled_item(client, requester):
     assert response.status_code == 200
     assert not ProductionRequest.objects.exists()
     assert "Każda pozycja zamówienia indeksów" in response.content.decode()
+
+
+def test_erp_index_field_is_prepared_for_future_barcode_scanning(client, requester):
+    client.force_login(requester)
+
+    response = client.get(reverse("requests:create"))
+
+    assert response.status_code == 200
+    assert b'data-barcode-format="code128"' in response.content
+    assert b'data-scanner-ready="true"' in response.content

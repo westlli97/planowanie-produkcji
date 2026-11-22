@@ -3,7 +3,7 @@
     <div class="grid gap-4 sm:grid-cols-2">
         <div class="sm:col-span-2">
             <label for="{{ form.erp_index.id_for_label }}" class="mb-1 block text-sm font-medium">Indeks ERP <span x-show="requestType === 'INDEX_ORDER'" class="text-red-700">(wymagany)</span></label>
-            <input type="text" name="{{ form.erp_index.html_name }}" id="{{ form.erp_index.id_for_label }}" value="{{ form.erp_index.value|default_if_none:'' }}" maxlength="100" class="min-h-11 w-full rounded-lg border border-slate-300 px-3" :required="requestType === 'INDEX_ORDER'">
+            <input type="text" name="{{ form.erp_index.html_name }}" id="{{ form.erp_index.id_for_label }}" value="{{ form.erp_index.value|default_if_none:'' }}" maxlength="100" autocomplete="off" inputmode="text" data-barcode-format="code128" data-scanner-ready="true" class="min-h-11 w-full rounded-lg border border-slate-300 px-3" :required="requestType === 'INDEX_ORDER'">
             {% for error in form.erp_index.errors %}<p class="mt-1 text-sm text-red-700">{{ error }}</p>{% endfor %}
         </div>
         <div>
