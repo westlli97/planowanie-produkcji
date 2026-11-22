@@ -56,7 +56,7 @@
 
 ## Faza 2: Zgłoszenia i zamówienia indeksów (`requests`)
 
-### [ ] Krok 2.1: Modele zgłoszeń, pozycji i historii
+### [x] Krok 2.1: Modele zgłoszeń, pozycji i historii
 - **Źródła:** `logika_biznesowa_aplikacji_komunikacji_biuro_produkcja.md` (sekcje 4.4, 14.8, 14.9, 14.10, 14.11)
 - **Zakres:**
   - Model `ProductionRequest`: rodzaj (`INDEX_ORDER` / `OTHER`), priorytet (`NORMAL` / `URGENT`), opcjonalny `due_date`, status, `erp_reference_number`, autor, daty.
@@ -145,6 +145,7 @@
   - Weryfikacja responsywności (karty zamiast szerokich tabel na mobile) oraz dodanie atrybutów przygotowujących pole `erp_index` pod przyszły skaner kodów **Code-128** (sekcja 14.13.2).
 - **Kryteria akceptacji (DoD):**
   - Pełny test E2E ścieżki od zgłoszenia potrzeby przez produkcję po realizację zadania, `ruff check .` oraz `pytest` na zielono.
+
 
 
 
