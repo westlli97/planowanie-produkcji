@@ -96,7 +96,7 @@
 
 ## Faza 3: Zadania produkcyjne (`production`)
 
-### [ ] Krok 3.1: Modele zadań i sesji uczestnictwa
+### [x] Krok 3.1: Modele zadań i sesji uczestnictwa
 - **Źródła:** `logika_biznesowa_aplikacji_komunikacji_biuro_produkcja.md` (sekcje 5.2, 5.4, 14.5, 14.7, 14.8)
 - **Zakres:**
   - Model `ProductionTask`: tytuł, opis, przypisanie do `OrganizationUnit` (zadanie ogólne) lub konkretnego `User` (zadanie indywidualne), priorytet (`NORMAL`/`URGENT`), termin, status, opcjonalne powiązanie z `ProductionRequest`.
@@ -145,6 +145,7 @@
   - Weryfikacja responsywności (karty zamiast szerokich tabel na mobile) oraz dodanie atrybutów przygotowujących pole `erp_index` pod przyszły skaner kodów **Code-128** (sekcja 14.13.2).
 - **Kryteria akceptacji (DoD):**
   - Pełny test E2E ścieżki od zgłoszenia potrzeby przez produkcję po realizację zadania, `ruff check .` oraz `pytest` na zielono.
+
 
 
 
