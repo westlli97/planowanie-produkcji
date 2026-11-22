@@ -1,0 +1,23 @@
+<fieldset id="{{ form.prefix }}" class="request-item rounded-xl border border-slate-200 bg-slate-50 p-4 sm:p-5">
+    <legend class="px-1 font-semibold">Pozycja</legend>
+    <div class="grid gap-4 sm:grid-cols-2">
+        <div class="sm:col-span-2">
+            <label for="{{ form.erp_index.id_for_label }}" class="mb-1 block text-sm font-medium">Indeks ERP <span x-show="requestType === 'INDEX_ORDER'" class="text-red-700">(wymagany)</span></label>
+            <input type="text" name="{{ form.erp_index.html_name }}" id="{{ form.erp_index.id_for_label }}" value="{{ form.erp_index.value|default_if_none:'' }}" maxlength="100" class="min-h-11 w-full rounded-lg border border-slate-300 px-3" :required="requestType === 'INDEX_ORDER'">
+            {% for error in form.erp_index.errors %}<p class="mt-1 text-sm text-red-700">{{ error }}</p>{% endfor %}
+        </div>
+        <div>
+            <label for="{{ form.quantity.id_for_label }}" class="mb-1 block text-sm font-medium">Ilość <span class="font-normal text-slate-500">(opcjonalnie)</span></label>
+            {{ form.quantity }}
+        </div>
+        <div>
+            <label for="{{ form.unit.id_for_label }}" class="mb-1 block text-sm font-medium">Jednostka <span class="font-normal text-slate-500">(opcjonalnie)</span></label>
+            {{ form.unit }}
+        </div>
+        <div class="sm:col-span-2">
+            <label for="{{ form.comment.id_for_label }}" class="mb-1 block text-sm font-medium">Komentarz do pozycji</label>
+            {{ form.comment }}
+        </div>
+    </div>
+</fieldset>
+{% if next_index %}<input type="hidden" name="items-TOTAL_FORMS" value="{{ next_index }}" id="id_items-TOTAL_FORMS" hx-swap-oob="true">{% endif %}

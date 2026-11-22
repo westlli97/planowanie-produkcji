@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block title %}Nowe zgłoszenie | Biuro – Produkcja{% endblock %}
+{% block content %}
+<section class="mx-auto max-w-3xl space-y-6" aria-labelledby="request-heading">
+    <header><h1 id="request-heading" class="text-2xl font-bold sm:text-3xl">Nowe zgłoszenie</h1><p class="mt-2 text-slate-600">Uzupełnij rodzaj i priorytet, a następnie dodaj pozycje.</p></header>
+    <form id="request-create-form" method="post" class="space-y-6" x-data="{ requestType: '{{ request_form.request_type.value|default:'OTHER' }}', submitting: false }" @submit="if (submitting) { $event.preventDefault() } else { submitting = true }">
+        {% csrf_token %}
+        {% if request_form.non_field_errors %}<div class="rounded-lg bg-red-50 p-3 text-sm text-red-800" role="alert">{{ request_form.non_field_errors }}</div>{% endif %}
+        <div class="grid gap-4 rounded-xl border border-slate-200 bg-white p-4 sm:grid-cols-2 sm:p-6">
+            <div><label for="{{ request_form.request_type.id_for_label }}" class="mb-1 block text-sm font-medium">Rodzaj zgłoszenia</label>{{ request_form.request_type }}{% for error in request_form.request_type.errors %}<p class="text-sm text-red-700">{{ error }}</p>{% endfor %}</div>
+            <div><label for="{{ request_form.priority.id_for_label }}" class="mb-1 block text-sm font-medium">Priorytet</label>{{ request_form.priority }}{% for error in request_form.priority.errors %}<p class="text-sm text-red-700">{{ error }}</p>{% endfor %}</div>
+            <div><label for="{{ request_form.due_date.id_for_label }}" class="mb-1 block text-sm font-medium">Termin realizacji <span class="font-normal text-slate-500">(opcjonalnie)</span></label>{{ request_form.due_date }}</div>
+            <div><label for="{{ request_form.erp_reference_number.id_for_label }}" class="mb-1 block text-sm font-medium">Numer referencyjny ERP <span class="font-normal text-slate-500">(opcjonalnie)</span></label>{{ request_form.erp_reference_number }}</div>
+        </div>
+        <section class="space-y-3" aria-labelledby="items-heading">
+            <div><h2 id="items-heading" class="text-xl font-semibold">Pozycje</h2><p class="text-sm text-slate-600">Ilość i jednostka są opcjonalne.</p></div>
+            {{ formset.management_form }}
+            {% if formset.non_form_errors %}<div class="rounded-lg bg-red-50 p-3 text-sm text-red-800" role="alert">{{ formset.non_form_errors }}</div>{% endif %}
+            <div id="request-items" class="space-y-3">{% for form in formset.forms %}{% include "components/request_item_form.html" with next_index=0 %}{% endfor %}</div>
+            <button type="button" class="min-h-11 w-full rounded-lg border border-teal-700 px-4 py-3 font-semibold text-teal-800 sm:w-auto" hx-get="{% url 'requests:item-add' %}" hx-vals='js:{index: document.getElementById("id_items-TOTAL_FORMS").value}' hx-target="#request-items" hx-swap="beforeend">Dodaj kolejną pozycję</button>
+        </section>
+        <button type="submit" class="min-h-12 w-full rounded-lg bg-teal-700 px-5 py-3 font-semibold text-white hover:bg-teal-800 sm:w-auto" :disabled="submitting" :class="submitting ? 'cursor-wait opacity-60' : ''"><span x-text="submitting ? 'Zapisywanie…' : 'Utwórz zgłoszenie'"></span></button>
+    </form>
+</section>
+{% endblock %}

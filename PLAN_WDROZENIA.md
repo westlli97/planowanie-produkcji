@@ -65,7 +65,7 @@
 - **Kryteria akceptacji (DoD):**
   - Migracje i testy walidacji (brak błędu przy pustej ilości/jednostce; brak wymogu indeksu dla `OTHER`).
 
-### [ ] Krok 2.2: Formularz tworzenia zgłoszenia (HTMX)
+### [x] Krok 2.2: Formularz tworzenia zgłoszenia (HTMX)
 - **Źródła:** `logika_biznesowa_aplikacji_komunikacji_biuro_produkcja.md` (sekcje 14.9, 14.10, 14.10.1)
 - **Zakres:**
   - Formularz *mobile-first* z wyborem rodzaju zgłoszenia i priorytetu (`Normalny` / `Pilny`).
@@ -145,6 +145,7 @@
   - Weryfikacja responsywności (karty zamiast szerokich tabel na mobile) oraz dodanie atrybutów przygotowujących pole `erp_index` pod przyszły skaner kodów **Code-128** (sekcja 14.13.2).
 - **Kryteria akceptacji (DoD):**
   - Pełny test E2E ścieżki od zgłoszenia potrzeby przez produkcję po realizację zadania, `ruff check .` oraz `pytest` na zielono.
+
 
 
 
