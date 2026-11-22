@@ -1,8 +1,11 @@
 from django.core.exceptions import PermissionDenied
 from django.db import transaction
+from django.urls import reverse
 from django.utils import timezone
 
+from apps.accounts.models import User
 from apps.accounts.services import has_permission
+from apps.notifications.services import create_notification
 from apps.production.models import ProductionTask, TaskHistory, TaskParticipation
 from apps.production.selectors import get_visible_task
 
@@ -20,6 +23,22 @@ def create_production_task(*, task, actor):
         new_value=str(assignee),
         metadata={"priority": task.priority, "status": task.status},
     )
+    recipients = (
+        User.objects.filter(pk=task.assigned_user_id)
+        if task.assigned_user_id
+        else User.objects.filter(
+            memberships__organization_unit=task.assigned_unit,
+            memberships__organization_unit__is_active=True,
+        )
+    )
+    if recipients.exists():
+        create_notification(
+            recipients=recipients,
+            event_type="task_assigned",
+            title="Nowe zadanie produkcyjne",
+            body=task.title,
+            url=reverse("production:task-detail", args=[task.pk]),
+        )
     return task
 
 
@@ -44,6 +63,13 @@ def transfer_individual_task(*, task, actor, new_user):
         actor=actor,
         old_value=str(old_user),
         new_value=str(new_user),
+    )
+    create_notification(
+        recipients=User.objects.filter(pk=new_user.pk),
+        event_type="task_transferred",
+        title="Przekazano Ci zadanie",
+        body=task.title,
+        url=reverse("production:task-detail", args=[task.pk]),
     )
     return task
 

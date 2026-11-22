@@ -128,7 +128,7 @@
 
 ## Faza 4: Powiadomienia w czasie rzeczywistym i Pulpity (`notifications` & `dashboard`)
 
-### [ ] Krok 4.1: Powiadomienia w bazie i WebSocket (Django Channels)
+### [x] Krok 4.1: Powiadomienia w bazie i WebSocket (Django Channels)
 - **Źródła:** `ZALOZENIA_TECHNICZNE.md` (sekcja 8), `logika_biznesowa_aplikacji_komunikacji_biuro_produkcja.md` (sekcja 14.13.1)
 - **Zakres:**
   - Konfiguracja ASGI, `Django Channels` i `Redis`.
@@ -145,6 +145,7 @@
   - Weryfikacja responsywności (karty zamiast szerokich tabel na mobile) oraz dodanie atrybutów przygotowujących pole `erp_index` pod przyszły skaner kodów **Code-128** (sekcja 14.13.2).
 - **Kryteria akceptacji (DoD):**
   - Pełny test E2E ścieżki od zgłoszenia potrzeby przez produkcję po realizację zadania, `ruff check .` oraz `pytest` na zielono.
+
 
 
 

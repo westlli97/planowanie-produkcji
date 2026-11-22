@@ -1,8 +1,10 @@
 from django.core.exceptions import PermissionDenied
 from django.db import transaction
+from django.urls import reverse
 
 from apps.accounts.models import User
 from apps.accounts.services import has_permission
+from apps.notifications.services import create_notification
 from apps.requests.models import PriorityHistory, RequestHistory
 
 
@@ -25,6 +27,18 @@ def create_request_with_items(*, production_request, item_formset, author):
         new_priority=production_request.priority,
         actor=author,
     )
+    if author.worker_type == User.WorkerType.PRODUCTION:
+        office_recipients = User.objects.filter(
+            worker_type=User.WorkerType.OFFICE, is_active=True
+        )
+        if office_recipients.exists():
+            create_notification(
+                recipients=office_recipients,
+                event_type="request_created",
+                title="Nowe zgłoszenie z Produkcji",
+                body=f"Zgłoszenie #{production_request.pk} zostało utworzone.",
+                url=reverse("requests:detail", args=[production_request.pk]),
+            )
     return production_request
 
 
