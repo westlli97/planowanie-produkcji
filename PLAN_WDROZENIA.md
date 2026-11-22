@@ -35,7 +35,7 @@
 - **Kryteria akceptacji (DoD):**
   - Testy `pytest` weryfikujące logowanie, wylogowanie i przekierowanie niezalogowanych użytkowników.
 
-### [ ] Krok 1.2: Dynamiczna struktura organizacyjna
+### [x] Krok 1.2: Dynamiczna struktura organizacyjna
 - **Źródła:** `logika_biznesowa_aplikacji_komunikacji_biuro_produkcja.md` (sekcje 14.2, 14.3)
 - **Zakres:**
   - Modele `OrganizationUnit` (drzewo działów/grup/podgrup o dowolnej głębokości, flaga aktywności) oraz `UserMembership` (rozróżnienie na przynależność główną `is_primary=True` i dodatkowe `is_primary=False`).
@@ -145,5 +145,6 @@
   - Weryfikacja responsywności (karty zamiast szerokich tabel na mobile) oraz dodanie atrybutów przygotowujących pole `erp_index` pod przyszły skaner kodów **Code-128** (sekcja 14.13.2).
 - **Kryteria akceptacji (DoD):**
   - Pełny test E2E ścieżki od zgłoszenia potrzeby przez produkcję po realizację zadania, `ruff check .` oraz `pytest` na zielono.
+
 
 
