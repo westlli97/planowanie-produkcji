@@ -1,0 +1,15 @@
+<section class="fixed inset-0 z-50 flex items-center justify-center bg-slate-950/50 p-4" role="dialog" aria-modal="true" aria-labelledby="finish-task-heading">
+    <div class="w-full max-w-lg rounded-xl bg-white p-5 shadow-xl sm:p-7">
+        <h2 id="finish-task-heading" class="text-xl font-semibold">Zakończyć zadanie?</h2>
+        <p class="mt-2">Czy na pewno chcesz zakończyć zadanie „{{ task.title }}” dla wszystkich uczestników?</p>
+        <p class="mt-3 text-sm font-medium">Aktywni uczestnicy:</p>
+        <ul class="mt-2 list-inside list-disc text-sm">
+            {% for participation in active_participations %}<li>{{ participation.user.get_full_name|default:participation.user.username }}</li>{% empty %}<li>Brak aktywnych uczestników.</li>{% endfor %}
+        </ul>
+        <form method="post" action="{% url 'production:task-finish' task.pk %}" hx-post="{% url 'production:task-finish' task.pk %}" hx-target="#task-state" hx-swap="outerHTML" class="mt-5 flex justify-end gap-2">
+            {% csrf_token %}
+            <button type="button" class="min-h-11 rounded-lg border border-slate-300 px-4 py-2" onclick="document.getElementById('modal-container').innerHTML = ''">Anuluj</button>
+            <button type="submit" class="min-h-11 rounded-lg bg-teal-700 px-4 py-2 font-semibold text-white">Zakończ</button>
+        </form>
+    </div>
+</section>

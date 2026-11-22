@@ -114,7 +114,7 @@
 - **Kryteria akceptacji (DoD):**
   - Testy izolacji widoczności zadań między działami oraz testy uprawnień przekazywania zadania.
 
-### [ ] Krok 3.3: Cykl życia zadania (Rozpocznij, Dołącz, Opuść, Zakończ)
+### [x] Krok 3.3: Cykl życia zadania (Rozpocznij, Dołącz, Opuść, Zakończ)
 - **Źródła:** `logika_biznesowa_aplikacji_komunikacji_biuro_produkcja.md` (sekcje 14.5.1, 14.5.2, 14.5.3, 14.5.4)
 - **Zakres:**
   - Przyciski HTMX: **„Rozpocznij”** / **„Dołącz”** (tworzy nowy rekord `TaskParticipation`).
@@ -145,6 +145,7 @@
   - Weryfikacja responsywności (karty zamiast szerokich tabel na mobile) oraz dodanie atrybutów przygotowujących pole `erp_index` pod przyszły skaner kodów **Code-128** (sekcja 14.13.2).
 - **Kryteria akceptacji (DoD):**
   - Pełny test E2E ścieżki od zgłoszenia potrzeby przez produkcję po realizację zadania, `ruff check .` oraz `pytest` na zielono.
+
 
 
 

@@ -1,0 +1,64 @@
+<section id="task-state" class="space-y-6" x-data="{ leaveOpen: false }">
+    <section class="rounded-xl border border-slate-200 bg-white p-5 sm:p-7" aria-labelledby="participants-heading">
+        <div class="flex flex-wrap items-start justify-between gap-3">
+            <div>
+                <h2 id="participants-heading" class="text-xl font-semibold">Uczestnicy realizacji</h2>
+                <p class="mt-1 text-sm text-slate-600">{{ active_participations|length }} aktywnych</p>
+            </div>
+            {% if task.status != "COMPLETED" and task.status != "CANCELLED" %}
+                {% if is_active_participant %}
+                    <div class="flex flex-wrap gap-2">
+                        <button type="button" @click="leaveOpen = true" class="min-h-11 rounded-lg border border-slate-300 px-4 py-2 font-semibold">Opuść</button>
+                        <button type="button" hx-get="{% url 'production:task-finish-confirmation' task.pk %}" hx-target="#modal-container" hx-swap="innerHTML" class="min-h-11 rounded-lg bg-teal-700 px-4 py-2 font-semibold text-white">Zakończ zadanie</button>
+                    </div>
+                {% else %}
+                    <form method="post" action="{% url 'production:task-join' task.pk %}" hx-post="{% url 'production:task-join' task.pk %}" hx-target="#task-state" hx-swap="outerHTML">
+                        {% csrf_token %}
+                        <button type="submit" class="min-h-11 rounded-lg bg-teal-700 px-5 py-3 font-semibold text-white">{% if has_participated %}Dołącz{% else %}Rozpocznij{% endif %}</button>
+                    </form>
+                {% endif %}
+            {% endif %}
+        </div>
+        <ul class="mt-4 space-y-2">
+            {% for participation in active_participations %}
+                <li class="rounded-lg bg-slate-50 p-3">{{ participation.user.get_full_name|default:participation.user.username }} <span class="text-sm text-emerald-800">· aktywny</span></li>
+            {% empty %}<li class="text-slate-600">Nikt obecnie nie realizuje tego zadania.</li>{% endfor %}
+        </ul>
+    </section>
+    <section class="rounded-xl border border-slate-200 bg-white p-5 sm:p-7">
+        <h2 class="text-xl font-semibold">Historia uczestnictwa</h2>
+        <ol class="mt-4 space-y-3">
+            {% for participation in participations %}
+                <li class="rounded-lg bg-slate-50 p-3">
+                    <p class="font-medium">{{ participation.user.get_full_name|default:participation.user.username }}</p>
+                    <p class="mt-1 text-sm text-slate-600">Rozpoczęcie: {{ participation.started_at|date:"d.m.Y H:i:s" }}</p>
+                    {% if participation.left_at %}<p class="text-sm text-slate-600">Opuszczenie: {{ participation.left_at|date:"d.m.Y H:i:s" }}</p>{% else %}<p class="text-sm text-emerald-800">Nadal uczestniczy</p>{% endif %}
+                    {% if participation.leave_note %}<p class="mt-1 text-sm">Adnotacja: {{ participation.leave_note }}</p>{% endif %}
+                </li>
+            {% empty %}<li class="text-slate-600">Brak historii uczestnictwa.</li>{% endfor %}
+        </ol>
+    </section>
+    <section class="rounded-xl border border-slate-200 bg-white p-5 sm:p-7">
+        <h2 class="text-xl font-semibold">Historia zadania</h2>
+        <ol class="mt-4 space-y-2 text-sm">
+            {% for event in task_history %}
+                <li class="rounded-lg bg-slate-50 p-3">
+                    {{ event.created_at|date:"d.m.Y H:i:s" }} · {{ event.get_event_type_display }}{% if event.actor %} · {{ event.actor.get_full_name|default:event.actor.username }}{% endif %}
+                    {% if event.event_type == "COMPLETED" and event.metadata.active_participants %}<p class="mt-1">Aktywni uczestnicy: {% for participant in event.metadata.active_participants %}{{ participant.name }}{% if not forloop.last %}, {% endif %}{% endfor %}</p>{% endif %}
+                </li>
+            {% empty %}<li>Brak zdarzeń.</li>{% endfor %}
+        </ol>
+    </section>
+    <div x-cloak x-show="leaveOpen" class="fixed inset-0 z-50 flex items-center justify-center bg-slate-950/50 p-4" role="dialog" aria-modal="true" aria-labelledby="leave-task-heading">
+        <section class="w-full max-w-lg rounded-xl bg-white p-5 shadow-xl sm:p-7">
+            <h2 id="leave-task-heading" class="text-xl font-semibold">Opuść zadanie</h2>
+            <p class="mt-2 text-sm text-slate-600">Adnotacja jest opcjonalna. Pozostali uczestnicy będą mogli kontynuować pracę.</p>
+            <form method="post" action="{% url 'production:task-leave' task.pk %}" hx-post="{% url 'production:task-leave' task.pk %}" hx-target="#task-state" hx-swap="outerHTML" class="mt-4 space-y-4">
+                {% csrf_token %}
+                <label for="id_leave_note" class="block text-sm font-medium">Adnotacja (opcjonalnie)</label>
+                <textarea name="leave_note" id="id_leave_note" rows="3" class="w-full rounded-lg border border-slate-300 px-3 py-2"></textarea>
+                <div class="flex justify-end gap-2"><button type="button" @click="leaveOpen = false" class="min-h-11 rounded-lg border border-slate-300 px-4 py-2">Wróć</button><button type="submit" class="min-h-11 rounded-lg bg-teal-700 px-4 py-2 font-semibold text-white">Potwierdź opuszczenie</button></div>
+            </form>
+        </section>
+    </div>
+</section>

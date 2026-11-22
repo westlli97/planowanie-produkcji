@@ -23,3 +23,8 @@ def get_visible_tasks(*, user):
         ).values_list("user_id", flat=True)
         visibility_filter |= Q(assigned_user_id__in=team_user_ids)
     return tasks.filter(visibility_filter).distinct()
+
+
+
+def get_visible_task(*, user, task_id):
+    return get_visible_tasks(user=user).filter(pk=task_id).first()

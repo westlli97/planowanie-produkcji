@@ -48,3 +48,17 @@ class TaskTransferForm(forms.Form):
         queryset=User.objects.filter(is_active=True).order_by("username"),
         label="Przypisz do pracownika",
     )
+
+
+class LeaveTaskForm(forms.Form):
+    leave_note = forms.CharField(
+        label="Adnotacja (opcjonalnie)",
+        required=False,
+        widget=forms.Textarea(attrs={"rows": 3}),
+    )
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields["leave_note"].widget.attrs["class"] = (
+            "w-full rounded-lg border border-slate-300 px-3 py-2"
+        )
