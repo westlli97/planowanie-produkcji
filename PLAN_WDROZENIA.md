@@ -43,7 +43,7 @@
 - **Kryteria akceptacji (DoD):**
   - Testy tworzenia wielopoziomowej struktury i przypisania jednego użytkownika do wielu działów z zachowaniem głównego działu.
 
-### [ ] Krok 1.3: Dynamiczne funkcje i silnik uprawnień
+### [x] Krok 1.3: Dynamiczne funkcje i silnik uprawnień
 - **Źródła:** `logika_biznesowa_aplikacji_komunikacji_biuro_produkcja.md` (sekcja 14.4)
 - **Zakres:**
   - Modele `JobFunction` (tworzone i edytowane dowolnie przez admina, z zestawem domyślnych uprawnień) oraz indywidualne nadpisania uprawnień dla użytkowników i grup (`PermissionOverride`).
@@ -145,6 +145,7 @@
   - Weryfikacja responsywności (karty zamiast szerokich tabel na mobile) oraz dodanie atrybutów przygotowujących pole `erp_index` pod przyszły skaner kodów **Code-128** (sekcja 14.13.2).
 - **Kryteria akceptacji (DoD):**
   - Pełny test E2E ścieżki od zgłoszenia potrzeby przez produkcję po realizację zadania, `ruff check .` oraz `pytest` na zielono.
+
 
 
 

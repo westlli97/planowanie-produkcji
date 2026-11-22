@@ -26,6 +26,33 @@ urlpatterns = [
         operational_views.organization_membership_add,
         name="organization-membership-add",
     ),
+    path("permissions/", operational_views.permission_panel, name="permission-panel"),
+    path("permissions/new/", operational_views.permission_create, name="permission-create"),
+    path(
+        "permissions/functions/new/",
+        operational_views.job_function_edit,
+        name="job-function-create",
+    ),
+    path(
+        "permissions/functions/<int:function_id>/edit/",
+        operational_views.job_function_edit,
+        name="job-function-edit",
+    ),
+    path(
+        "permissions/assign/",
+        operational_views.function_assignment_add,
+        name="function-assignment-add",
+    ),
+    path(
+        "permissions/override/",
+        operational_views.permission_override_add,
+        name="permission-override-add",
+    ),
+    path(
+        "permissions/worker-default/",
+        operational_views.worker_type_permission_add,
+        name="worker-type-permission-add",
+    ),
     path(
         "login/",
         auth_views.LoginView.as_view(template_name="pages/login.html"),
