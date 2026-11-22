@@ -3,6 +3,7 @@
         <a href="/" class="text-lg font-bold text-teal-800" aria-label="Biuro – Produkcja, strona główna">Biuro – Produkcja</a>
         <nav class="hidden items-center gap-6 sm:flex" aria-label="Nawigacja główna">
             <a class="text-sm font-medium text-slate-700 hover:text-teal-800" href="{% url 'requests:list' %}">Zgłoszenia</a>
+            <a class="text-sm font-medium text-slate-700 hover:text-teal-800" href="{% url 'production:task-list' %}">Zadania</a>
             {% if request.user.is_authenticated %}
                 <form method="post" action="{% url 'accounts:logout' %}">
                     {% csrf_token %}
@@ -19,6 +20,7 @@
     </div>
     <nav id="mobile-navigation" class="border-t border-slate-200 px-4 py-3 sm:hidden" aria-label="Nawigacja mobilna" x-show="menuOpen" x-cloak>
         <a class="block min-h-11 py-3 text-sm font-medium text-slate-700" href="{% url 'requests:list' %}">Zgłoszenia</a>
+        <a class="block min-h-11 py-3 text-sm font-medium text-slate-700" href="{% url 'production:task-list' %}">Zadania</a>
         {% if request.user.is_authenticated %}
             <form method="post" action="{% url 'accounts:logout' %}">
                 {% csrf_token %}

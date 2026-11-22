@@ -105,7 +105,7 @@
 - **Kryteria akceptacji (DoD):**
   - Migracje i testy potwierdzające możliwość wielokrotnego uczestnictwa tego samego pracownika w jednym zadaniu.
 
-### [ ] Krok 3.2: Tworzenie, widoczność i przekazywanie zadań
+### [x] Krok 3.2: Tworzenie, widoczność i przekazywanie zadań
 - **Źródła:** `logika_biznesowa_aplikacji_komunikacji_biuro_produkcja.md` (sekcje 14.5, 14.11.2, 14.12.1)
 - **Zakres:**
   - Formularz tworzenia zadania i nadawania początkowego priorytetu przez zlecającego.
@@ -145,6 +145,7 @@
   - Weryfikacja responsywności (karty zamiast szerokich tabel na mobile) oraz dodanie atrybutów przygotowujących pole `erp_index` pod przyszły skaner kodów **Code-128** (sekcja 14.13.2).
 - **Kryteria akceptacji (DoD):**
   - Pełny test E2E ścieżki od zgłoszenia potrzeby przez produkcję po realizację zadania, `ruff check .` oraz `pytest` na zielono.
+
 
 
 
