@@ -1,0 +1,7 @@
+Django>=5.2,<6.0
+channels>=4.2,<5.0
+channels-redis>=4.2,<5.0
+psycopg[binary]>=3.2,<4.0
+pytest>=8.3,<9.0
+pytest-django>=4.11,<5.0
+ruff>=0.14,<1.0

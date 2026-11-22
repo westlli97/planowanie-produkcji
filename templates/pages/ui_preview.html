@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block title %}Podgląd komponentów | Biuro – Produkcja{% endblock %}
+{% block content %}
+<section aria-labelledby="preview-heading" class="space-y-6">
+    <h1 id="preview-heading" class="text-2xl font-bold sm:text-3xl">Podgląd wspólnych komponentów</h1>
+    <div class="flex flex-wrap gap-3">
+        {% include "components/status_badge.html" with label="Nowe" color="blue" %}
+        {% include "components/priority_badge.html" with label="Wysoki" color="red" %}
+    </div>
+    <button type="button" class="min-h-11 rounded-lg bg-teal-700 px-5 py-3 font-semibold text-white hover:bg-teal-800"
+            hx-get="/ui-preview/modal/" hx-target="#modal-container" hx-swap="innerHTML">Otwórz okno</button>
+</section>
+{% endblock %}

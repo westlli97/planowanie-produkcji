@@ -1,0 +1,15 @@
+<header class="border-b border-slate-200 bg-white" x-data="{ menuOpen: false }">
+    <div class="mx-auto flex max-w-7xl items-center justify-between px-4 py-3 sm:px-6">
+        <a href="/" class="text-lg font-bold text-teal-800" aria-label="Biuro – Produkcja, strona główna">Biuro – Produkcja</a>
+        <nav class="hidden items-center gap-6 sm:flex" aria-label="Nawigacja główna">
+            <a class="text-sm font-medium text-slate-700 hover:text-teal-800" href="/">Strona główna</a>
+        </nav>
+        <button type="button" class="min-h-11 min-w-11 rounded-lg border border-slate-300 px-3 text-sm font-medium sm:hidden"
+                @click="menuOpen = !menuOpen" :aria-expanded="menuOpen.toString()" aria-controls="mobile-navigation">
+            <span x-text="menuOpen ? 'Zamknij' : 'Menu'"></span>
+        </button>
+    </div>
+    <nav id="mobile-navigation" class="border-t border-slate-200 px-4 py-3 sm:hidden" aria-label="Nawigacja mobilna" x-show="menuOpen" x-cloak>
+        <a class="block min-h-11 py-3 text-sm font-medium text-slate-700" href="/">Strona główna</a>
+    </nav>
+</header>

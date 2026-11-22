@@ -1,0 +1,24 @@
+{% load static %}
+<!doctype html>
+<html lang="pl">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#0f766e">
+    <title>{% block title %}Biuro – Produkcja{% endblock %}</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script defer src="https://unpkg.com/htmx.org@2.0.4"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.14.9/dist/cdn.min.js"></script>
+    <link rel="stylesheet" href="{% static 'css/app.css' %}">
+    {% block extra_head %}{% endblock %}
+</head>
+<body class="min-h-screen bg-slate-50 text-slate-900 antialiased">
+    {% include "components/navigation.html" %}
+    <main id="main-content" class="mx-auto w-full max-w-7xl px-4 py-5 sm:px-6 sm:py-8">
+        {% include "components/toast_container.html" %}
+        {% block content %}{% endblock %}
+    </main>
+    {% include "components/modal_container.html" %}
+    {% block extra_scripts %}{% endblock %}
+</body>
+</html>
