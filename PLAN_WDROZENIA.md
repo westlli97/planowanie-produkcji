@@ -82,7 +82,7 @@
 - **Kryteria akceptacji (DoD):**
   - Testy weryfikujące, że pracownik produkcji widzi zgłoszenia innych osób i może wyszukać indeks w obu zakładkach.
 
-### [ ] Krok 2.4: Obsługa zgłoszeń, zmiana statusów, priorytetów i terminów
+### [x] Krok 2.4: Obsługa zgłoszeń, zmiana statusów, priorytetów i terminów
 - **Źródła:** `logika_biznesowa_aplikacji_komunikacji_biuro_produkcja.md` (sekcje 4.3, 14.11, 14.12.2, 14.12.3, 14.12.4)
 - **Zakres:**
   - Szczegóły zgłoszenia (bez funkcji czatu/odpowiadania — tylko podgląd komentarzy z utworzenia).
@@ -145,6 +145,7 @@
   - Weryfikacja responsywności (karty zamiast szerokich tabel na mobile) oraz dodanie atrybutów przygotowujących pole `erp_index` pod przyszły skaner kodów **Code-128** (sekcja 14.13.2).
 - **Kryteria akceptacji (DoD):**
   - Pełny test E2E ścieżki od zgłoszenia potrzeby przez produkcję po realizację zadania, `ruff check .` oraz `pytest` na zielono.
+
 
 
 

@@ -74,3 +74,27 @@ RequestItemFormSet = inlineformset_factory(
     extra=1,
     can_delete=False,
 )
+
+
+class RequestStatusForm(forms.Form):
+    status = forms.ChoiceField(choices=ProductionRequest.Status.choices, label="Status")
+
+
+class RequestPriorityForm(forms.Form):
+    priority = forms.ChoiceField(
+        choices=ProductionRequest.Priority.choices, label="Priorytet"
+    )
+
+
+class RequestDueDateForm(forms.Form):
+    due_date = forms.DateField(
+        label="Termin realizacji",
+        required=False,
+        widget=forms.DateInput(attrs={"type": "date"}),
+    )
+
+
+class ERPReferenceForm(forms.Form):
+    erp_reference_number = forms.CharField(
+        label="Numer referencyjny ERP", max_length=100, required=False
+    )

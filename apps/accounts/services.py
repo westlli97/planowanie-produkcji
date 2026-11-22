@@ -65,7 +65,7 @@ def set_permission_override(*, permission, allowed, user=None, group=None):
 def has_permission(user, permission_code):
     if not getattr(user, "is_authenticated", False):
         return False
-    if user.is_superuser:
+    if user.is_superuser or user.is_staff:
         return True
 
     if user.job_functions.filter(job_function__is_administrator=True).exists():
