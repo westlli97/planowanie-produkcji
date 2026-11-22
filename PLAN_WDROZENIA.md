@@ -27,7 +27,7 @@
 
 ## Faza 1: Użytkownicy, struktura i uprawnienia (`accounts`)
 
-### [ ] Krok 1.1: Model użytkownika i logowanie
+### [x] Krok 1.1: Model użytkownika i logowanie
 - **Źródła:** `ZALOZENIA_TECHNICZNE.md` (sekcja 6), `logika_biznesowa_aplikacji_komunikacji_biuro_produkcja.md` (sekcja 14.1)
 - **Zakres:**
   - Utwórz własny model `User` (`AbstractUser`) z polem typu pracownika (`OFFICE` / `PRODUCTION`).
@@ -145,4 +145,5 @@
   - Weryfikacja responsywności (karty zamiast szerokich tabel na mobile) oraz dodanie atrybutów przygotowujących pole `erp_index` pod przyszły skaner kodów **Code-128** (sekcja 14.13.2).
 - **Kryteria akceptacji (DoD):**
   - Pełny test E2E ścieżki od zgłoszenia potrzeby przez produkcję po realizację zadania, `ruff check .` oraz `pytest` na zielono.
+
 
