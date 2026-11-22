@@ -3,6 +3,7 @@ from django.http import HttpResponseBadRequest
 from django.shortcuts import redirect, render
 
 from apps.requests.forms import ProductionRequestForm, RequestItemForm, RequestItemFormSet
+from apps.requests.selectors import get_request_list
 from apps.requests.services import create_request_with_items
 
 
@@ -47,3 +48,19 @@ def request_item_add(request):
         "components/request_item_form.html",
         {"form": form, "next_index": index + 1},
     )
+
+
+def request_list(request):
+    tab = "closed" if request.GET.get("tab") == "closed" else "open"
+    query = request.GET.get("q", "")
+    context = {
+        "requests": get_request_list(tab=tab, query=query),
+        "tab": tab,
+        "query": query,
+    }
+    template = (
+        "components/request_list_results.html"
+        if request.headers.get("HX-Request") == "true"
+        else "pages/request_list.html"
+    )
+    return render(request, template, context)

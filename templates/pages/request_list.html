@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block title %}Zgłoszenia | Biuro – Produkcja{% endblock %}
+{% block content %}
+<section class="space-y-6" aria-labelledby="requests-heading">
+    <header class="flex flex-wrap items-end justify-between gap-4">
+        <div><h1 id="requests-heading" class="text-2xl font-bold sm:text-3xl">Zgłoszenia i zamówienia</h1><p class="mt-2 text-slate-600">Widoczne dla Biura i całej Produkcji.</p></div>
+        <a class="inline-flex min-h-11 items-center rounded-lg bg-teal-700 px-5 py-3 font-semibold text-white" href="{% url 'requests:create' %}">Nowe zgłoszenie</a>
+    </header>
+    <nav class="flex gap-2 border-b border-slate-200" aria-label="Zakres zgłoszeń">
+        <a class="min-h-11 px-4 py-3 font-semibold {% if tab == 'open' %}border-b-2 border-teal-700 text-teal-800{% else %}text-slate-600{% endif %}" href="{% url 'requests:list' %}?tab=open">Otwarte</a>
+        <a class="min-h-11 px-4 py-3 font-semibold {% if tab == 'closed' %}border-b-2 border-teal-700 text-teal-800{% else %}text-slate-600{% endif %}" href="{% url 'requests:list' %}?tab=closed">Zrealizowane</a>
+    </nav>
+    <form id="request-search" method="get" action="{% url 'requests:list' %}" hx-get="{% url 'requests:list' %}" hx-trigger="keyup changed delay:300ms from:#id_q, search" hx-target="#request-results" hx-swap="outerHTML" hx-push-url="true" class="flex flex-col gap-3 sm:flex-row">
+        <input type="hidden" name="tab" value="{{ tab }}">
+        <label for="id_q" class="sr-only">Szukaj indeksu ERP</label>
+        <input id="id_q" name="q" type="search" value="{{ query }}" placeholder="Szukaj indeksu ERP" class="min-h-11 flex-1 rounded-lg border border-slate-300 px-3">
+        <button class="min-h-11 rounded-lg border border-slate-300 px-5 py-3 font-semibold" type="submit">Szukaj</button>
+    </form>
+    {% include "components/request_list_results.html" %}
+</section>
+{% endblock %}

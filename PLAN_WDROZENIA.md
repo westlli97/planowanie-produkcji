@@ -74,7 +74,7 @@
 - **Kryteria akceptacji (DoD):**
   - Testy POST tworzące zgłoszenie z 1 oraz z 3 pozycjami i osobnymi komentarzami.
 
-### [ ] Krok 2.3: Widoki list (Otwarte / Zrealizowane) i wyszukiwarka
+### [x] Krok 2.3: Widoki list (Otwarte / Zrealizowane) i wyszukiwarka
 - **Źródła:** `logika_biznesowa_aplikacji_komunikacji_biuro_produkcja.md` (sekcje 14.6, 14.12.1)
 - **Zakres:**
   - Widok dostępny dla wszystkich zalogowanych (zarówno Biuro, jak i cała Produkcja) podzielony na zakładki: **Otwarte** oraz **Zrealizowane**.
@@ -145,6 +145,7 @@
   - Weryfikacja responsywności (karty zamiast szerokich tabel na mobile) oraz dodanie atrybutów przygotowujących pole `erp_index` pod przyszły skaner kodów **Code-128** (sekcja 14.13.2).
 - **Kryteria akceptacji (DoD):**
   - Pełny test E2E ścieżki od zgłoszenia potrzeby przez produkcję po realizację zadania, `ruff check .` oraz `pytest` na zielono.
+
 
 
 
